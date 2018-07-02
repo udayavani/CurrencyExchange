@@ -1,0 +1,17 @@
+
+@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
+
+.curreny-navbar{
+  background-color:#e9ecef;
+  margin-bottom: 30px;
+}
+
+.input-group>.input-group-prepend:not(:first-child)>.input-group-text {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.outer-container {
+  padding: 56px;
+  background-color: #85B9EE;
+}

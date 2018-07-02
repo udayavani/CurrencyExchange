@@ -1,0 +1,57 @@
+
+<div class="outer-container">
+  <div class="container curreny-container">
+
+  <nav class="navbar navbar-light curreny-navbar">
+    <p class="navbar-brand" href="#">Currency Exchange</p>
+  </nav>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <form>
+        <div class="form-group">
+
+          <select class="form-control" id="fromCountry" (change)="fromCountryChangeHandler($event)">
+            <option>From Country</option>
+            <option *ngFor="let country of countries"
+                    [value]="toStr(country)">{{country.currencyName}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" [(ngModel)]="fromValue" (ngModelChange)="onFromChange($event)" [ngModelOptions]="{standalone: true}" class="form-control"  id="sendAmount" placeholder="Send Amount" aria-describedby="validationSendAmt" required>
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="validationSendAmt">{{fromCurrency.currencySymbol}}</span>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="col-sm-6">
+      <form>
+        <div class="form-group">
+          <select class="form-control" id="toCountry" (change)="toCountryChangeHandler($event)">
+            <option>To Country</option>
+            <option *ngFor="let country of countries"
+                    [value]="toStr(country)">{{country.currencyName}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+              <input type="text" [(ngModel)]="toValue" (ngModelChange)="onToChange($event)" [ngModelOptions]="{standalone: true}" class="form-control"  id="receiveAmount" placeholder="Receive Amount" aria-describedby="validationReceiveAmt" required>
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="validationReceiveAmt">{{toCurrency.currencySymbol}}</span>
+              </div>
+            </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+</div>
+
