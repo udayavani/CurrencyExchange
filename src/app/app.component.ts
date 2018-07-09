@@ -12,9 +12,9 @@ export class AppComponent implements OnInit {
 
   fromCurrency = {currencyCode: '', currencySymbol: ''};
   toCurrency = {currencyCode: '', currencySymbol: ''};
-  fromValue = 0.0;
-  toValue = 0.0;
-  exchangeRate = 0.0;
+  fromValue: any = 0.0;
+  toValue: any = 0.0;
+  exchangeRate: any = 0.0;
   toStr = JSON.stringify;
 
   sorters = {
@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
   getAllCountries(): void {
     this.exchangeService.getAllCountries()
       .subscribe((data: any) => {
-          console.log('success', data);
           // this.results = data.results;
           data.forEach(country => {
             this.countries.push({currencyName: country.currencies[0].name, currencyCode: country.currencies[0].code, currencySymbol: country.currencies[0].symbol });
@@ -52,7 +51,11 @@ export class AppComponent implements OnInit {
     this.exchangeService.getExachangeRate(fromToCurrencyCode)
       .subscribe((data: any) => {
           this.exchangeRate = data[fromToCurrencyCode].val;
-          this.toValue = this.fromValue * this.exchangeRate;
+          if (this.fromValue > 0) {
+            this.toValue = (this.fromValue * this.exchangeRate).toFixed(2);
+          } else if (this.toValue > 0) {
+            this.fromValue = (this.toValue / this.exchangeRate).toFixed(2);
+          }
         },
         (error: any) => {
           console.log('error', error);
@@ -60,7 +63,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  fromCountryChangeHandler (event: any) {
+fromCountryChangeHandler (event: any) {
 
     const toCurrency =  JSON.parse(event.target.value);
     this.fromCurrency.currencySymbol = toCurrency.currencySymbol;
@@ -92,7 +95,7 @@ export class AppComponent implements OnInit {
       this.getExachangeRate();
     }
 
-    this.fromValue = this.toValue * this.exchangeRate;
+    this.fromValue = (this.toValue / this.exchangeRate).toFixed(2);
   }
 
   onFromChange(event: any) {
@@ -101,11 +104,11 @@ export class AppComponent implements OnInit {
       this.getExachangeRate();
     }
 
-    this.toValue = this.fromValue * this.exchangeRate;
+    this.toValue = (this.fromValue * this.exchangeRate).toFixed(2);
 
   }
 
-  removeDuplicates(currencies, prop) {
+  private removeDuplicates(currencies, prop) {
     return this.countries.sort(this.sorters.byCurrencyName).filter((obj, pos, arr) => {
       return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
     });

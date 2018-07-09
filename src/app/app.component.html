@@ -21,7 +21,7 @@
 
         <div class="form-group">
           <div class="input-group">
-            <input type="text" [(ngModel)]="fromValue" (ngModelChange)="onFromChange($event)" [ngModelOptions]="{standalone: true}" class="form-control"  id="sendAmount" placeholder="Send Amount" aria-describedby="validationSendAmt" required>
+            <input type="text" [(ngModel)]="fromValue" (ngModelChange)="onFromChange($event)" [ngModelOptions]="{standalone: true}" class="form-control from-amount"  id="sendAmount" placeholder="Send Amount" aria-describedby="validationSendAmt" required>
             <div class="input-group-prepend">
               <span class="input-group-text" id="validationSendAmt">{{fromCurrency.currencySymbol}}</span>
             </div>
@@ -42,7 +42,7 @@
         </div>
         <div class="form-group">
             <div class="input-group">
-              <input type="text" [(ngModel)]="toValue" (ngModelChange)="onToChange($event)" [ngModelOptions]="{standalone: true}" class="form-control"  id="receiveAmount" placeholder="Receive Amount" aria-describedby="validationReceiveAmt" required>
+              <input type="text" [(ngModel)]="toValue" (ngModelChange)="onToChange($event)" [ngModelOptions]="{standalone: true}" class="form-control to-amount"  id="receiveAmount" placeholder="Receive Amount" aria-describedby="validationReceiveAmt" required>
               <div class="input-group-prepend">
                 <span class="input-group-text" id="validationReceiveAmt">{{toCurrency.currencySymbol}}</span>
               </div>
